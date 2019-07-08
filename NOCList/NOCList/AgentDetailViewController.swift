@@ -28,8 +28,11 @@ class AgentDetailViewController: UIViewController {
         // MARK: - Hiding Compromised Label
         
         if agent.compromised == true {
+            view.backgroundColor = UIColor(hue: 0, saturation: 0.4, brightness: 0.9, alpha: 1.0)
+
             self.compromisedLabel.isHidden = false
         }else {
+            view.backgroundColor = .white
             self.compromisedLabel.isHidden = true
         }
     }
