@@ -10,11 +10,15 @@ import UIKit
 
 class NOCListTableViewController: UITableViewController
 {
+    //
     // MARK: - Properties
+    //
     
     private var agents: [(coverName: String, realName: String, accessLevel: Int, compromised: Bool)] = []
     
+    //
     // MARK: - View Lifecycle
+    //
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +28,9 @@ class NOCListTableViewController: UITableViewController
         loadNOCList()
     }
     
+    //
     // MARK: - Table view data source
+    //
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return agents.count
@@ -52,16 +58,26 @@ class NOCListTableViewController: UITableViewController
         return cell
     }
     
+    //
     // MARK: - Navigation
+    //
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let selectedIndexPath = tableView.indexPathForSelectedRow!
+        guard let selectedIndexPath = tableView.indexPathForSelectedRow else {
+            print("error unwrapping selectedIndexPath")
+            return
+        }
         let selectedAgent = agents[selectedIndexPath.row]
-        guard let agentDetailVC = segue.destination as? AgentDetailViewController else { return }
+        guard let agentDetailVC = segue.destination as? AgentDetailViewController else {
+            print("Error assigning segue")
+            return
+        }
         agentDetailVC.agent = selectedAgent
     }
     
+    //
     // MARK: - Private
+    //
     
     private func loadNOCList() {
         let ethan = (coverName: "Ethan Hunt", realName: "Tom Cruise", accessLevel: 8, compromised: true)
